@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.coolweather.app.R;
+import com.coolweather.app.service.AutoUpdateService;
 import com.coolweather.app.util.HttpCallbackListener;
 import com.coolweather.app.util.HttpUtil;
 import com.coolweather.app.util.Utility;
@@ -172,7 +173,7 @@ public class WeatherActivity extends Activity implements View.OnClickListener {
     private void showWeather() {
         SharedPreferences prefs = PreferenceManager.
                 getDefaultSharedPreferences(this);
-        cityNameText.setText(prefs.getString("city_name", ""));
+        cityNameText.setText( prefs.getString("city_name", ""));
         temp1Text.setText(prefs.getString("temp1", ""));
         temp2Text.setText(prefs.getString("temp2", ""));
         weatherDespText.setText(prefs.getString("weather_desp", ""));
@@ -180,5 +181,7 @@ public class WeatherActivity extends Activity implements View.OnClickListener {
         currentDateText.setText(prefs.getString("current_date", ""));
         weatherInfoLayout.setVisibility(View.VISIBLE);
         cityNameText.setVisibility(View.VISIBLE);
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startService(intent);
     }
 }
